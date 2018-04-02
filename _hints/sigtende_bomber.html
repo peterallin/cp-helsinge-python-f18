@@ -1,0 +1,70 @@
+---
+layout: hint
+title: Få bomberne til at sigte 
+index: 4
+---
+<h2>Mål</h2>
+<p>
+    For at spillet ikke skal være for nemt, skal vi have bomberne til at sigte efter byerne i stedet for bare at falde lodret
+    nedaf.
+</p>
+<h2>En udfordring / et problem</h2>
+<p>
+    Når en ting i spillet skal bevæge sig på skrå i stedet for langs en af akserne, skal man ændre både X og Y koordinaten. Hvis
+    man skal kunne ramme ethvert sted på skærmen, skal man kunne ændre koordinaterne i mindre skridt end 1 pixel af gangen.
+    For eksempel kan man få brug for at bevæge en bombe en pixel mod højre og 0,25 pixels nedaf for hver opdatering af GameState.
+</p>
+<p>
+    Desværre er Pygames Rect objekter, beregnet til at rektangler på skærmen og kan derfor kun håndtere hele antal pixels. Hvis
+    man prøver at ændre placeringen af et Pygame Rect objekt med mindre en 1 pixel, sker der ingenting.
+</p>
+<p>
+    En løsning på dette problem er at tilføje to ekstra variable, "x" og "y" til Bomb objekterne. Disse variable skal starte
+    med tage deres værdier fra "rect.x" og "rect.y" Når man så ønsker at flytte bomben, ændrer man værdien af "x" og "y"
+    i stedet for "rect.x" og "rect.y". Efter at have beregnet de nye "x" og "y" værdier, som kan indeholde kommatal, skrivre
+    man disse værdier over i "rect.x" og "rect.y", der så runder ned.
+</p>
+
+<h2>Ændringer til Bomb klassen</h2>
+<p>
+    I stedet for blot at tage en enkelt hastighed, skal __init__ funktionen nu tage en hastighed langs X aksen, "x_speed", og
+    en hastighed langs Y aksen, "y_speed".
+</p>
+<p>
+    Funktionen "move" skal ændres, så den flytter bomben som beskrevet ovenfor (ved at ændre 
+    "x" og "y", og så gemme værdierne i "rect.x" og "rect.y")
+</p>
+
+<h2>Ændringer til GameState klassen</h2>
+<p>
+    Der hvor man tilføjer en ny bombe til spillet, skal man nu vælge hvilken by, bomben skal sigte efter. Det mest oplagte er at
+    bruge funktionen "random.choice", der givet en liste returnerer et tilfældigt element fra listen. Så hvis man kalder "random.choice",
+    med listen af byer, får man en tilfældig by returneret.
+</p>
+<p>
+    Når man har valgt bye kan man taget dens rect, og vælge et af punkterne i den. feks. "center" eller "midbottom" ville være oplagte
+    at sigte efter.
+</p>
+<p>
+    Nu skal vi så regne ud hvilke "x_speed" og "y_speed" vi skal give den nye bombe. Her får vi brug for en type matematik, der kaldes
+    trigonometri, som vi ikke vil komme nærmere ind på her. I stedet får i to funktioner her, som givet et startpunkt, et mål og en ønsket
+    hastiged, kan regne en X hastighed og en Y hastighed ud:
+</p>
+{% highlight python %}
+def calculate_x_velocity(position, target, velocity):
+    direction = math.atan2(target[1] - position[1], target[0] - position[0])
+    return velocity * math.cos(direction)
+
+
+def calculate_y_velocity(position, target, velocity):
+    direction = math.atan2(target[1] - position[1], target[0] - position[0])
+    return velocity * math.sin(direction)
+{% endhighlight %}
+<p>
+    Parameteren "position" er koordinatsættet for startpunktet, "target" er koordinatsættet for målet og "velocity" en den hastighed man
+    ønsker bomben skal bevæge sig med. Funktionen "calculate_x_velocity" giver den nødvendige hastighed langs X aksen, mens "calculate_y_velocity"
+    giver hastigheden langs Y aksen.
+</p>
+<p>
+    Brug disse to funktioner og giv så hastighederne til den nye bombe.
+</p>

@@ -1,0 +1,6 @@
+highlighter: rouge
+collections:
+  solutions:
+    output: true
+  hints:
+    output: true

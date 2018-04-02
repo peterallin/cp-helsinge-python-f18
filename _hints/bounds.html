@@ -1,0 +1,36 @@
+---
+layout: hint
+title: Hold spilleren på skærmen
+index: 1
+---
+<h2>Ændringer til Player klassen
+</h2>
+
+<p>
+    Player objektet skal kende et Rect, som det skal holde sig inden for.
+</p>
+<p>      
+    Dette Rect kan Player klassen ikke selv "opfinde", så det skal gives som parameter til
+    __init__ funktionen, som så gemmer den i objektet. Et godt navn kunne være "bounds", "limits" eller "arena".
+</p>
+<p>
+    I move funktionen skal man, når spilleren vil til venstre, checke om venstre side af spillerens Rect er til 
+    højre for venstre side af det rect, som spilleren skal holde sig inden for. Hvis det er tilfældet kan man flytte
+    mod venstre, ellers kan man ikke. Her kan man bruge at et Rect objekt (altså både spillerens og det område spilleren
+    skal blive i) indeholder en variabel "left", der giver X koordinaten for rektanglets venstre side.
+</p>
+<p>
+    Tilsvarende check skal man bruge når spilleren vil til højre. Her skal man så bruge den "right" variabel, der er i Rect
+    objekterne, og spillerns højre side skal være til venstre for højre side af det Rect, som spilleren skal blive inden for.
+
+</p>       
+       
+<h2>
+    Ændringer uden for Player klassen
+</h2>
+     
+<p>
+    Det hvor Player objektet bliver lavet skal man nu give en Rect til objektet, som er det rektangel objektet skal blive inden for.
+    Dette rektangel kan få fra "screen" variablen (eller "window" hvis du har kaldt den det), der har en get_rect funktion i sig, der
+    netop giver dette rektangel.        
+</p>

@@ -1,0 +1,13 @@
+@import url(tango.css);
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+header h1 {
+    float: left;
+}
+
+header nav {
+    float: right;
+}

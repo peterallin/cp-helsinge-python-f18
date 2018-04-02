@@ -1,0 +1,2 @@
+{% assign hints = site.hints | sort: 'index' %}
+{% assign solutions = site.solutions | sort: 'index' %}

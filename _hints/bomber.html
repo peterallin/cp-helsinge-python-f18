@@ -1,0 +1,74 @@
+---
+layout: hint
+title: Tilføj bomber
+index: 3
+---
+<h2>Mål</h2>
+<p>
+    Vi er nu nået til at at skulle sørge for at der falder "bomber"
+    ned mod byerne, som spilleren så skal skyde ned inden de rammer
+    byerne.
+</p>
+<p>
+    I denne omgang kommer man ikke til at kunne skyde mod bomberne,
+    de kommer ikke til at skade byerne når de rammer og de sigter 
+    heller ikke mod byerne. Alle de ting kommer senere.
+</p>
+
+<h2>Ændringer til Images klassen</h2>
+<p>
+    Der skal loades et nye billede ("enemy_bomb.png").
+</p>
+
+
+<h2>Ny klasse: Bomb</h2>
+<p>
+    Vi får brug for en ny klasse, der skal repræsentere bomberne i spillet.
+    Den får brug for to variable: det rect, der omkranser bomben, og den 
+    hastighed bomben bevæger sig med.
+</p>
+<p>
+    Udover "__init__" funktionen skal den have en "move", der rykker bomben
+    et antal pixels ned af skærmen (antallet af pixels afhænger af hvilken
+    hastighed, der står i objktet).
+</p>
+
+
+<h2>Ændringer til GameState klassen</h2>
+<p>
+    Der skal tilføjes en liste af bomber, "bombs" ville være et oplagt navn,
+    den skal starte med at være tom.
+</p>
+<p>
+    I "update" funktionen skal man to nye ting
+</p>
+<ul>
+    <li>Tilføje nye bomber til "bombs" listen, når man synes det passer</li>
+    <li>Flytte alle de bomber, der allerede er i listen</li>
+</ul>
+<p>
+    Man kan bruge "random.randint" til at få et tilfældigt tal mellem f.eks.
+    1 og 1000 og så vælge at tilføje en bombe hvis dette tal bliver større
+    end f.eks. 998 (jo lavere tal, jo sværere spil).
+</p>
+<p>
+    Bomberne skal placeres øverste på skærmen (y=0) med en tilfældig 
+    x-koordinat. Igen kan man bruge "random.randint" til at få et tal
+    mellem 0 og skærmens bredde i pixels.   
+</p>
+<p>
+    Når man har valgt et startsted for bomben, kan man bruge "get_rect"
+    i billedet af bomben, til at få der rektangel den skal starte inden 
+    for. Dernæst kan man bruge "Bomb" klassen til at lave et nyt objekt, 
+    der så hægtes på "bombs" listen vha. "append" funktionen.
+</p>
+<p>
+    For at flytte bomberne bruger man en for-løkke til at kalde "move"
+    på alle objekterne i "bombs" listen.
+</p>
+
+<h2>Ændringer til paint_screen funktionen</h2>
+<p>
+    Bomberne skal tegnes. Det gøres på samme måde som man tegner
+    byerne.
+</p>

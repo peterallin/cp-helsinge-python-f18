@@ -1,0 +1,81 @@
+---
+layout: solution
+title: Hold spilleren på skærmen
+index: 2
+---
+
+{% highlight python %}
+import pygame
+
+
+class PlayerInput:
+    def __init__(self):
+        self.stop = False
+        self.left = False
+        self.right = False
+
+    def update(self):
+        events = pygame.event.get()
+        for this_event in events:
+            if this_event.type == pygame.QUIT:
+                self.stop = True
+            elif this_event.type == pygame.KEYDOWN:
+                if this_event.key == pygame.K_a:
+                    self.left = True
+                if this_event.key == pygame.K_d:
+                    self.right = True
+            elif this_event.type == pygame.KEYUP:
+                if this_event.key == pygame.K_a:
+                    self.left = False
+                if this_event.key == pygame.K_d:
+                    self.right = False
+
+
+class Images:
+    def __init__(self):
+        self.player = pygame.image.load("player.png").convert_alpha()
+
+
+class Player:
+    def __init__(self, rect, bounds):
+        self.rect = rect
+        self.bounds = bounds
+
+    def move(self, player_input):
+        if player_input.left and self.rect.left > self.bounds.left:
+            self.rect.x = self.rect.x - 1
+        if player_input.right and self.rect.right < self.bounds.right:
+            self.rect.x = self.rect.x + 1
+
+
+class GameState:
+    def __init__(self, images, screen):
+        player_rect = images.player.get_rect(bottomleft=(0, 600))
+        self.player = Player(player_rect, screen.get_rect())
+
+    def update(self, player_input):
+        self.player.move(player_input)
+
+
+def paint_screen(screen, game_state, images):
+    screen.fill((0, 0, 0))
+    screen.blit(images.player, game_state.player.rect)
+    pygame.display.flip()
+
+
+def main_loop(screen):
+    player_input = PlayerInput()
+    images = Images()
+    game_state = GameState(images, screen)
+    while not player_input.stop:
+        paint_screen(screen, game_state, images)
+        player_input.update()
+        game_state.update(player_input)
+
+
+pygame.init()
+s = pygame.display.set_mode((800, 600))
+main_loop(s)
+pygame.quit()
+
+{% endhighlight %}

@@ -12,7 +12,7 @@ index: 6
 <h2>Teknikker</h2>
 <p>
   Det vi skal nå frem til at at bomberne skal fjernes fra "bombs" listen, når de
-  blivre ramt af et skud. Dette vil få dem til også at forsvinde fra skærmen,
+  bliver ramt af et skud. Dette vil få dem til også at forsvinde fra skærmen,
   da vi kun tegner de bomber, der er i listen.
 </p>
 <p>
@@ -30,7 +30,7 @@ l.remove(999)
 <p>
   For at finde ud af hvilke bomber der skal fjernes, kan man bruge funktionen
   "colliderect" der findes i Rect-objekter til at finde ud af om to rektangler
-  ovrelapper. I koden herunder er "rect1" og "rect2" Rect-objekter og "collision"
+  overlapper. I koden herunder er "rect1" og "rect2" Rect-objekter og "collision"
   bliver "True" hvis de overlapper ellers "False".
 </p>
 {% highlight python %}
@@ -87,3 +87,24 @@ for a in list(aliens):
   if has_been_killed(a):
      aliens.remove(a)
 {% endhighlight %}
+
+<h2>Lidt oprydning</h2>
+
+<p>
+Når bomber og skud bevæger sig uden for skærmen, kan vi ikke se dem
+længere. Men det betyder ikke at de er væk! De er stadig i vores
+lister og gør at computeren bruger tid og hukommelse på dem. Det
+betyder endda også at de, når de har bevæget sig tilpas langt,
+pludselig dukker op på skærmen igen.
+</p>
+
+<p>
+  Defor skal vi slette dem, når de bevæger sig uden for skærmen. At
+  finde ud af om de er på skærmen eller ej, gøres lettest ved at
+  spørge om deres rect kolliderer med skærmens rect eller ej. 
+</p>
+
+<p>
+  Skærmens rect kan fås ved at bruge "get_rect" funktionen på
+  screen/window objektet.
+</p>

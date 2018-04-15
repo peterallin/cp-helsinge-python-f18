@@ -7,7 +7,7 @@ index: 5
 <p>
 Det skal nu gøres muligt for spilleren at skyde. I første
 omgang skal man blot skyde lodret opad. Senere hen tilføjer
-vi et sigekort, der styres med musen, så man kan skyde i
+vi et sigekorn, der styres med musen, så man kan skyde i
 vikårlige retninger. I den første udgave bliver det også sådan
 at skuddene ikke gør noget ved bomberne, men det kommer også senere.
 </p>
@@ -33,7 +33,7 @@ sat til pygame.K_RETURN.
 <h2>Ny klasse: Shot</h2>
 <p>
 Vi får brug for en ny klasse, hvis objekter skal repræsentere et af spillerens
-skud. Man kan f.eks. kalder den "Shot" eller "PlayerShot". Klassen kan, i hvert
+skud. Man kan f.eks. kalde den "Shot" eller "PlayerShot". Klassen kan, i hvert
 fald i første omgang, være magen til "Bomb" klassen.
 </p>
 
@@ -48,7 +48,9 @@ for en liste af skud. Man kan f.eks. kalde den "shots" eller måske
   listen med skud. Måden man tilføjer et nyt skud på er cirka den samme, som
   måden man tilføjer en bombe på. Dog skal skuddet starte ved spilleren og ikke i
   toppen skærmen (player objektet i gamestate har et rect, der ved hvor spilleren
-  er).
+  er). En anden forskel er at skuddet skal bevæge sig lodret opad og ikke sigte efter
+  en by (det vil sige et dets y-hastighed skal være mindre end 0, og x-hastigheden
+  være præcis 0).
 </p>
 <p>
   I "paint_screen" skal skuddene tegnes på samme måde som bomberne og byerne.
@@ -67,7 +69,7 @@ nemt skal vi begrænse det lidt. Det kan vi gøre ved at kræve at spilleren ska
 have sluppet knappen, når der er blevet skudt, før et nyt skud kan tilføjes.
 </p>
 <p>
-For at kræve at spilleren slipper skydeknappen mellem hvert skud, kan man tilføjer
+For at kræve at spilleren slipper skydeknappen mellem hvert skud, kan man tilføje
 en variabel i GameState, der holder styr på om der er tilføjet et skud for nuværende
 nedtrykning af knappen eller ej. Et oplagt navn ville være "has_shot", og den
 skal starte med at være "False"

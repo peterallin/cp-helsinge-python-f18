@@ -1,0 +1,89 @@
+---
+layout: hint
+title: Virkningsfulde skud og bomber
+index: 6
+---
+<h2>Mål</h2>
+<p>
+  Spillerens skud skal nu kunne ødelægge bomberne. Som ekstra bonus vil det nu
+  blive tydeligt, hvorfor vi bruger Rect-objekter, til at holde styr på hvor på
+  skærmen de forskellige objekter er.
+</p>
+<h2>Teknikker</h2>
+<p>
+  Det vi skal nå frem til at at bomberne skal fjernes fra "bombs" listen, når de
+  blivre ramt af et skud. Dette vil få dem til også at forsvinde fra skærmen,
+  da vi kun tegner de bomber, der er i listen.
+</p>
+<p>
+  Man bruge "remove" funktionen, der findes i lister til at fjerne elementer fra
+  en liste. F.eks. vil denne kode
+</p>
+{% highlight python %}
+l = [100, 999, 200, 300]
+l.remove(999)
+{% endhighlight %}
+<p>
+  Resultere i at listen "l" indeholder tallene 100, 200 og 300 fordi 999 er
+  blevet fjernet
+</p>
+<p>
+  For at finde ud af hvilke bomber der skal fjernes, kan man bruge funktionen
+  "colliderect" der findes i Rect-objekter til at finde ud af om to rektangler
+  ovrelapper. I koden herunder er "rect1" og "rect2" Rect-objekter og "collision"
+  bliver "True" hvis de overlapper ellers "False".
+</p>
+{% highlight python %}
+collision = rect1.colliderect(rect2)
+{% endhighlight %}
+<p>
+  Hvis de to Rect-objekter der bestemmer en bombes og et skuds placeringer
+  overlapper, siger vi at de har ramt hinanden.
+</p>
+
+<h2>Gør spillerens skud virkningsfulde</h2>
+<p>
+  For hvert af spillerens skud, skal man kontrollere om dette skud kolliderer
+  med en af bomberne. For at matche alle bomberne op mod alle skuddene får man
+  brug for to for-løkker: En der løber alle skuddene igennem, og inden i den en
+  der løber alle bomberne igennem.
+</p>
+<p>
+  I den inderste løkke skal man så bruge "colliderect" til at kontrollere om det skud
+  man er nået til, kolliderer med den bombe man er nået til. Hvis det er tilfældet,
+  skal bomben fjernes fra listen. Ny begynder det at minde om et spil!
+</p>
+
+<h2>Gør bomberne virkningsfulde</h2>
+<p>Dette gøres på præcis samme måde som da skudderne skulle gøres virkningsfulde.
+  Dog skal man løbe igennem bomberne og byerne i stedet for bomberne og skuddende.</p>
+
+<p>
+  Når den sidste by er ødelagt risikerer man at få en fejl fra "random.choice"
+  funktionen fordi den ikke kan vælge et element fra en tom liste. Dette fikses
+  ved at checke om by-listen er tom, inden man overvejer at tilføje en bombe.
+</p>
+
+
+<h2>En lidt sær fej</h2>
+<p>
+  Når man løber en liste igennem med en for-løkke og samtidig fjerner elementer fra
+  listen, kan Python nogen gange kløjes i det, fordi det element den var nået til
+  blev fjerne for næsen af den.
+</p>
+<p>
+  For at undgå denne fejl kan man tage en kopi af den liste, man vil fjerne elementer fra, og løbe
+  kopien igennem i stedet. Man kan tage en kopi af listen "aliens" ved at skrive "list(aliens)".
+  Så fejlen kan undgås ved ændre kode i stil med dette:
+</p>
+{% highlight python %}
+for a in aliens:
+  if has_been_killed(a):
+     aliens.remove(a)
+{% endhighlight %}
+<p>til det her:</p>
+{% highlight python %}
+for a in list(aliens):
+  if has_been_killed(a):
+     aliens.remove(a)
+{% endhighlight %}

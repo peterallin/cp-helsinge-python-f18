@@ -1,0 +1,58 @@
+---
+layout: hint
+title: Mulighed for at sigte med skuddene
+index: 7
+---
+<h2>Mål</h2>
+<p>
+  Spilleren skal kunne styre et sigtekorn med musen, og når der skydes
+  skal skuddet bevæge sig fra spillerfiguren i retning af sigtekornet.
+  I samme omgang ændres det således at man skyder med musen i stedet
+  for return-knappen.
+</p>
+<h2>Teknikker</h2>
+<p>
+  Vi får brug for at finde ud af hvor på skærmen musen er. Dette gøres
+  ved hjælp af funktionen "pygame.mouse.get_pos()", der returnerer et
+  koordinatsæt.
+</p>
+<p>
+  Vi skal også aflæse om spilleren har trykket på museknappen. Dette er faktisk
+  lidt simplere end tastaturet, da vi direkte får at vide om tasten er trykket
+  ned nu eller ej, i stedet for at få events når den bliver trykket ned og sluppet.
+  Man bruger funktionen "pygame.mouse.get_pressed()", der returnerer en liste
+  af "False"/"True" for hver museknap. Venstre knap er den første, så man skal
+  skrive "pygame.mouse.get_pressed()[0]" for at få at vide om venstre knap
+  er trykket ned.
+</p>
+<h2>Ændringer til PlayerInput klassen</h2>
+<p>
+  I stedet for at følge med i om "return" bliver trykket ned eller sluppet,
+  skal man ved hver update sætte "fire" til "True", hvis venstre museknap er trykket
+  ned, og "False" hvis den ikke er.
+</p>
+<h2>Ændringer til Images klassen</h2>
+<p>
+  Vi har en fil der hedder "crosshair.png", den skal loades.
+</p>
+
+<h2>Ændringer til GameState klassen</h2>
+<p>
+  Når man tilføjer et skud skal det ikke længere kun have en opadrettet hastighed.
+  I stedet skal man gøre ligesom når man tilføjer en bombe. Blot skal målet ikke
+  være en by, men der hvor musen peger ("pygame.mouse.get_pos()")
+</p>
+
+<h2>Ændringer til paint_screen funktionen</h2>
+<p>
+  Sigtekornet skal tegnes der hvor musen peger
+</p>
+
+
+<h2>En lille kosmetisk ændring</h2>
+<p>
+  Det ser dumt ud at der er en muse-pil oven i sigtekornet. Hvis man
+  på et tidspunkt inden hoved-løkken kalder funktionen
+  "pygame.mouse_set_visible" med "False" som parameter, bliver den
+  skjult.
+</p>

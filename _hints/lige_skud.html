@@ -1,0 +1,83 @@
+---
+layout: hint
+title: Lodrette spillerskud
+index: 5
+---
+<h2>Mål</h2>
+<p>
+Det skal nu gøres muligt for spilleren at skyde. I første
+omgang skal man blot skyde lodret opad. Senere hen tilføjer
+vi et sigekort, der styres med musen, så man kan skyde i
+vikårlige retninger. I den første udgave bliver det også sådan
+at skuddene ikke gør noget ved bomberne, men det kommer også senere.
+</p>
+<h2>Ændring til Images klassen</h2>
+<p>Grafikken for spillerens skud skal loades. Hvis du bruger de grafikfiler,
+vi har givet jer, er det "shot.png", der skal loades.</p>
+
+<h2>Ændringer til PlayerInput klassen</h2>
+<p>
+PlayerInput skal have tilføjet en variabel, der er sand når spilleren
+vil skyde, og falsk ellers. Et oplagt navn er "fire". Den skal start
+med at være "False", da spilleren ikke har vist interesse for at skyde
+endnu, i det øjeblik spillet startes.
+</p>
+<p>
+Funktionen "update" skal nu udvides så den kan sætte "fire" til "True" og "False"
+afhængig af om skydetasten er trykket ned. Det gøres på samme måde som "left"
+og "right", men naturligvis med en anden tast. Hvis man vil bruge "return" som
+skydetast, skal man checke om "key" variablen i de events, der kommer ind, er
+sat til pygame.K_RETURN.
+</p>
+
+<h2>Ny klasse: Shot</h2>
+<p>
+Vi får brug for en ny klasse, hvis objekter skal repræsentere et af spillerens
+skud. Man kan f.eks. kalder den "Shot" eller "PlayerShot". Klassen kan, i hvert
+fald i første omgang, være magen til "Bomb" klassen.
+</p>
+
+<h2>Tilføje, tegne og flytte skud</h2>
+<p>
+For at holde styr på hvilke skud, der lige nu er i spillet, får klassen brug
+for en liste af skud. Man kan f.eks. kalde den "shots" eller måske
+"player_shots".
+</p>
+<p>
+  Når spilleren vil skyde, skal vi lave et nyt skud-objekt og tilføje det til
+  listen med skud. Måden man tilføjer et nyt skud på er cirka den samme, som
+  måden man tilføjer en bombe på. Dog skal skuddet starte ved spilleren og ikke i
+  toppen skærmen (player objektet i gamestate har et rect, der ved hvor spilleren
+  er).
+</p>
+<p>
+  I "paint_screen" skal skuddene tegnes på samme måde som bomberne og byerne.
+</p>
+
+<p>
+Nu skulle du gerne have et program der tilføjer skud, hver gang spilleren beder
+om det. Men skuddene bliver hængende der hvor de blev tilføjet. Du kan få dem
+til at bevæge sig, på samme måde som skuddene bevæges på.
+</p>
+
+<h2>Begræns mængden af skud</h2>
+<p>
+Nu kan spilleren skyde. Rigtig meget endda. Hvis ikke spillet skal være for
+nemt skal vi begrænse det lidt. Det kan vi gøre ved at kræve at spilleren skal
+have sluppet knappen, når der er blevet skudt, før et nyt skud kan tilføjes.
+</p>
+<p>
+For at kræve at spilleren slipper skydeknappen mellem hvert skud, kan man tilføjer
+en variabel i GameState, der holder styr på om der er tilføjet et skud for nuværende
+nedtrykning af knappen eller ej. Et oplagt navn ville være "has_shot", og den
+skal starte med at være "False"
+</p>
+<p>
+Når man tilføjer et skud skal "has_shot" sættes til "True". Den kan så sættes
+tilbage til "False" når man i "update" ser at "player_input.fire" er "False",
+altså når man set at spilleren har slupet skydetasten.
+</p>
+<p>
+For at begrænse skyderiet skal man så lave en "if" inden man tilføjer et skud,
+der kontrolleret at "has_shot" er "False"
+</p>

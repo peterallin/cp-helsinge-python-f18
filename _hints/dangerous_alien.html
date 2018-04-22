@@ -1,0 +1,39 @@
+---
+layout: hint
+title: Farlig alien
+index: 9
+---
+<h2>Mål</h2>
+<p>
+    Når spillerren bliver ramt af et skud fra en alien (eller en bombe) skal spillerfiguren forsvinde. 
+    På samme måde skal alienen forsvinde, hvis den blive ramt af spillerens skud.
+</p>
+
+<h2>Ændringer til Player klassen</h2>
+<p>
+    For at holde styr på om spilleren er blevet ramt eller ej, laver vi en ny variabel i Player klassen. 
+    Jeg har kaldt den "alive". Den er "True" når spillerfigureen lever, og "False" ellers.
+</p>
+<p>
+    Vi får brug for en funktion, der sætter "alive" til False. Jeg har kaldt den "hit" fordi den bliver
+    kaldt, når spillerfigueren blivre ramt.
+</p>
+
+<h2>Ændringer i forbindelse med at spillerfiguren er død</h2>
+<p>Når spillerfigurer er død:</p>
+<ul>
+    <li>Skal den ikke tegnes, dette afstedkommer en ændring i paint_screen</li>
+    <li>Kan den ikke skyde, dette kræver en ændring i "update" funktionen i GameState</li>
+    <li>Skal alienen ikke skyde efter den, derfor skal "maybe_shoot" i Alien klassen ændres lidt</li>
+</ul>
+
+<h2>Ændringer for at alien og spillerfiguren kan skydes</h2>
+<p>I "update" funktionen i GameState skal der laves check for om et af spillerens skud har ramt en af 
+    de aliens der er i listen "aliens". En ramt alien skal fjenes fra listen. Find inspiration de andre 
+    steder hvor vi checker om ting har ramt hinanden.
+</p>
+<p>
+    Også i "update" skal man checke om spilleren er blevet ramt af et skuddene fra "alien_shots" listen.
+    Hvis det er tilfældet, skal "hit" funktionen i Player klassen kaldes.
+ </p>
+ <p>Check også om spilleren er blevet ramt af en bombe</p>

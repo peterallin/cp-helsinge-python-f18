@@ -1,0 +1,78 @@
+---
+layout: hint
+title: Tilføj alien
+index: 8
+---
+<h2>Mål</h2>
+<p>
+    Vi skal have en alien til at flyve frem og tilbage i toppen af skærmen. Den skyder 
+    efter spiller-figuren, men dens skud er ikke farlige, det kommer i næste skridt. Man kan 
+    heller ikke skyde den, det kommer også i næste skridt.
+</p>
+<h2>Ændringer til Images</h2>
+<p>
+    Denne klasse skal loade to ekstra filer "alien.png" og "alien_shot.png". De loades på samme
+    måde som alle andre billeder.
+</p>
+
+<h2>Ændringer til GameState klassen</h2>
+<p>GameState klassen skal kunne indeholde en Alien, der nogengange er der og andre gange (når den 
+    lige er blevet skudt) ikke er der. En måde at gøre dette på er at bruge en liste, som så kan 
+    være tom, eller indeholde en alien. Jeg har valgt at kalde min liste for "aliens", selv om den 
+    kun kommer til at indeholde en. Det kan jo være man senere udvider spillet, så der kan være flere.
+</p>
+<p>Man skal også have en liste over de skud fra aliens der er i spillet lige nu. Jeg har kaldt 
+    den "alien_shots."
+</p>
+
+
+<h2>Ny klasse: Alien</h2>
+<p>
+    Vi får bruge for en ny klasse, Alien, hvis objekter skal repræsentere den/de alien(s) der
+    skal være på skærmen. Den skal indeholde følgende ting:
+</p>
+<ul>
+    <li>Et rect, der holder styr på hvor på skærmen den er</li>
+    <li>En X værdi der holder styr på dens placering langs X aksen, men som i modsætning til rectet
+        kan håndtere kommatal (samme trick som i Bomb klassen)</li>
+    <li>Et tal der fortæller hvor hurtigt den skal bevæge sig</li>
+    <li>Et rect, som den skal holde sig uden for</li>
+    <li>Et tal der angiver den nuværende retning (1 for højre, -1 for venstre)</li>
+    <li>Et tal der tæller hvor mange updates af game state, der skal ske før den skal skyde næste gang. Bør 
+        være tilfældigt for at gøre spillet mindre forudsigeligt. Jeg har kaldt den "time_to_shoot"</li>
+    <li>Et billede af det skud den skyder med (for at kunne lave rectet, når er skal laves et nyt skud</li>
+</ul>
+<p>
+    Der skal være en "move" funktion, der får alienen til at flytte sig. Dens X koordinat skal vokse,
+    når dens retning er 1 og skrumpe når retningen er -1. Udover at Y værdien ikke ændres, skal den
+    bevæge sig på samme måde som skuddene og bomberne. Når højre side af dens hitbox, er kommet ud over højre
+    kant af det rect den skal holde sig inden for, skal retningen sættes til -1. På samme måde skal retningen
+    sættes til 1 når venstre side af  dens hitbox er kommet ud over venstre kant af den rect, som den skal holde
+    sig iden for.
+</p>
+<p>
+    Der skal også være en funktion, som får den til at skyde, når den synes det er tid. Jeg har kaldt
+    den "maybe_shoot". For at kunne sigte får denne funktion brug for at få spilleren som input (for at 
+    kunne finde spillerens koordinater og sigte efter dem). Den skal også have "aliens_shots" listen fra 
+    GameState som input, således at den kan tilføje sit skud til den. Funktionen skal trække 1 fra "time_to_shoot"
+    og hvis den bliver 0 skal der skydes. Man skyder ved at lave et nyt Shot objekt, der starter ved alienen og
+    har spilleren som mål. Det kan laves på samme måde som man laver spillerskud og bomber. Når objektet er lavet,
+    skal det tilføjes til "alien_shots" listen, som funktionen tog som input. Husk at sætte "time_to_shoot" til
+    et nyt tilfældigt tal.
+</p>
+
+<h2>Ændringer til "update" funktionen i GameState</h2>
+<p>Alle skuddene i "alien_shots" listen skal flyttes. Det gøres på samme måde som spillerens skud og bomberne</p>
+<p>Ligeledes skal den alien der måtte være i "aliens" listen flyttes, på samme måde som skuddene. Den skal også
+    have kaldt sin "maybe_shoot" funktion, så den kan skyde efter spilleren.
+</p>
+<p>Hvis der ikke er nogen alien (alså "aliens" listen er tom), skal man ovreveje at tilføje en ny. Man kan gøre ligesom
+    med bomberne og vælge et tilfældigt tal mellem 1 og 1000 og så lave en ny alien, hvis tallet er over en 
+    eller anden grænse. Man tilføjer en alien ved at lave et ny objekt af Alien klassen og tilføje det til
+    listen "aliens".
+</p>
+
+<h2>Ændringer til "paint_screen" funktionen</h2>
+<p>Alle aliens i "aliens" listen og alle skud i "alien_shots" listen skal tegnes. En for løkke om hver liste 
+    og et kald til blit funktionen inde i hver løkke kan klare det.
+</p>
